@@ -1,0 +1,127 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "48b6449f",
+   "metadata": {},
+   "source": [
+    "## 저자풀이"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "dc65e25b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# N, M, K를 공백을 기준으로 구분하여 입력 받기\n",
+    "n, m, k = map(int, input().split())\n",
+    "# N개의 수를 공백을 기준으로 구분하여 입력 받기\n",
+    "data = list(map(int, input().split()))\n",
+    "\n",
+    "data.sort() # 입력 받은 수들 정렬하기\n",
+    "first = data[n - 1] # 가장 큰 수\n",
+    "second = data[n - 2] # 두 번째로 큰 수\n",
+    "\n",
+    "# 가장 큰 수가 더해지는 횟수 계산\n",
+    "count = int(m / (k + 1)) * k\n",
+    "count += m % (k + 1)\n",
+    "\n",
+    "result = 0\n",
+    "result += (count) * first # 가장 큰 수 더하기\n",
+    "result += (m - count) * second # 두 번째로 큰 수 더하기\n",
+    "\n",
+    "print(result) # 최종 답안 출력"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "58770c07",
+   "metadata": {},
+   "source": [
+    "## 내 풀이"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "b5bda77a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 내 풀이\n",
+    "def answer(n, m, k, num_list):\n",
+    "    num_list = sorted(num_list, reverse =True)\n",
+    "    count = k\n",
+    "    num_f, num_s = num_list[0], num_list[1]\n",
+    "    answer = 0\n",
+    "    for _ in range(m):\n",
+    "        if count > 0:\n",
+    "            answer += num_f\n",
+    "            count -= 1\n",
+    "        else:\n",
+    "            answer += num_s\n",
+    "            count = k\n",
+    "    return answer"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "a1402e55",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "46\n"
+     ]
+    }
+   ],
+   "source": [
+    "n, m, k, num_list = 5, 8, 3, [2,4,5,4,6]\n",
+    "print(answer(n, m, k, num_list))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8271a5ed",
+   "metadata": {},
+   "source": [
+    "## Note"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f8dcc977",
+   "metadata": {},
+   "source": [
+    "* 숫자 배열을 정렬한 뒤, 가장 큰 수와 두번째로 큰 수를 선택하여 가장 큰 수를 연속 가능한 횟수만큼 더하고, 두 번째로 큰 수를 한번 더하는 과정을 M번 만큼 반복하면 된다.\n",
+    "* 저자는 큰 수가 더해지는 횟수를 구했고, 나는 count에 k를 할당하여 가장 큰 수가 더해질 때마다 1씩 빼고, 두 번쨰로 큰 수가 더해지면 count에 다시 k를 할당하는 방법을 사용했다."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
